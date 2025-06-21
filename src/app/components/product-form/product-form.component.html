@@ -1,0 +1,36 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="card card-body bg-light mb-4">
+    <div class="mb-3">
+      <label>Nombre del producto</label>
+      <input type="text" class="form-control" formControlName="name"/>
+    </div>
+  
+    <div class="mb-3">
+      <label>Precio</label>
+      <input type="number" class="form-control" formControlName="price" 
+      [ngClass]="{ 'is-invalid': price?.invalid && (price?.dirty || price?.touched) }"/>
+      <div *ngIf="price?.invalid && (price?.dirty || price?.touched)" class="invalid-feedback">
+        <div *ngIf="price?.errors?.['required']">El precio es obligatorio.</div>
+        <div *ngIf="price?.errors?.['min']">El precio debe ser mayor a cero.</div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label>Correo del proveedor</label>
+      <input type="email" class="form-control" formControlName="providerEmail" 
+      [ngClass]="{ 'is-invalid': providerEmail?.invalid && (providerEmail?.dirty || providerEmail?.touched) }"/>
+      <div *ngIf="providerEmail?.invalid && (providerEmail?.dirty || providerEmail?.touched)" class="invalid-feedback">
+        <div *ngIf="providerEmail?.errors?.['required']">El correo es obligatorio.</div>
+        <div *ngIf="providerEmail?.errors?.['email']">Debe ingresar un correo válido.</div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label>Fecha de ingreso</label>
+      <input type="date" class="form-control" formControlName="entryDate" />
+    </div>
+  
+    <button class="btn btn-primary" type="submit" [disabled]="productForm.invalid">
+      {{ editingProduct ? 'Actualizar' : 'Agregar' }}
+    </button>
+  </form>
+  

@@ -1,0 +1,28 @@
+<app-product-form
+  [editingProduct]="selectedProduct"
+  (formSaved)="clearForm()"
+></app-product-form>
+
+<table class="table table-bordered table-striped mt-4">
+  <thead>
+    <tr>
+      <th style="width: 30%;">Nombre</th>
+      <th style="width: 10%;">Precio</th>
+      <th style="width: 30%;">Correo</th>
+      <th style="width: 15%;">Fecha</th>
+      <th style="width: 15%;"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of service.getProducts()">
+      <td>{{ product.name }}</td>
+      <td>{{ product.price | currency }}</td>
+      <td>{{ product.providerEmail }}</td>
+      <td>{{ product.entryDate | date:'dd/MM/yyyy'}}</td>
+      <td>
+        <button class="btn btn-sm btn-primary me-2" (click)="edit(product)">Editar</button>
+        <button class="btn btn-sm btn-danger" (click)="delete(product.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
